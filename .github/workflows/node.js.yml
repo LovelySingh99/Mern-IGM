@@ -28,7 +28,7 @@ jobs:
           CI: false  # Disable CI environment warnings
 
   deploy:
-    needs: build-and-test
+    needs: build
     runs-on: self-hosted
 
     steps:
