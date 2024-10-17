@@ -49,6 +49,6 @@ jobs:
           sudo git pull origin master
 
           # Restart the application
-          npm run start:dev
+          npm run start:staging
         env:
           CI: false  # Disable treating warnings as errors
