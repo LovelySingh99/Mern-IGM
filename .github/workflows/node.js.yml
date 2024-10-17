@@ -1,0 +1,54 @@
+name: Backend CI/CD
+
+on:
+  push:
+    branches:
+      - Developer
+
+jobs:
+  build:
+    runs-on: self-hosted
+
+    strategy:
+      matrix:
+        node-version: [18.x]
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install Dependencies
+        run: npm install
+        env:
+          CI: false  # Disable CI environment warnings
+
+  deploy:
+    needs: build-and-test
+    runs-on: self-hosted
+
+    steps:
+      - name: Check Parent Directory
+        run: ls -l /var/www/html
+
+      - name: Check Directory
+        run: ls -l /var/www/html/Mern-IGM
+
+      - name: Deploy Backend
+        run: |
+          set -e  # Exit on any error
+
+          # Navigate to the backend directory
+          cd /var/www/html/Mern-IGM
+
+          # Pull the latest code from the Developer branch
+          sudo git pull origin Developer
+
+          # Restart the application
+          npm run start:dev
+        env:
+          CI: false  # Disable treating warnings as errors
