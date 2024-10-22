@@ -33,4 +33,7 @@ router.post('/login', userValidations, async (req, res) => {
     }
 });
 
+router.get('/',async(req,res)=>{
+    res.send("Hello hai")
+})
 module.exports = router;
