@@ -4,7 +4,7 @@ const cors = require('cors');
 const userRoutes = require('./routes/userRoute');
 const productRoutes = require('./routes/productRoute');
 const quotationRoutes = require('./routes/quotationRoute');
-
+const dotenv =require('dotenv').config()
 const app = express();
 
 //Middleware
