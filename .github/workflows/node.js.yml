@@ -49,7 +49,7 @@ jobs:
           sudo git pull origin master
 
           # Restart the application
-          pm2 restart server 
+          pm2 start server.js 
 
           #restart the nginx
           sudo systemctl restart nginx
