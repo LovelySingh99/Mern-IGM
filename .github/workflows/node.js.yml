@@ -49,6 +49,10 @@ jobs:
           sudo git pull origin master
 
           # Restart the application
-          npm run start:stage
+          pm2 restart 0 
+
+          #restart the nginx
+          sudo systemctl restart nginx
+          
         env:
           CI: false  # Disable treating warnings as errors
